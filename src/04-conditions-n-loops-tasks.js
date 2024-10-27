@@ -461,6 +461,7 @@ function getMatrixProduct(m1, m2) {
   };
 
   fillResult(0);
+
   return result;
 }
 

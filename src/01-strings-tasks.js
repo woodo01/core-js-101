@@ -227,8 +227,24 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const getOffset = (code) => {
+    const isUpperCase = code >= 65 && code <= 90;
+    const isLowerCase = code >= 97 && code <= 122;
+    if (isUpperCase) return 65;
+    if (isLowerCase) return 97;
+    return null;
+  };
+  const rotateChar = (char) => {
+    const code = char.charCodeAt(0);
+
+    const offset = getOffset(code);
+    return offset !== null
+      ? String.fromCharCode(((code - offset + 13) % 26) + offset)
+      : char;
+  };
+
+  return Array.from(str).map(rotateChar).join('');
 }
 
 /**
